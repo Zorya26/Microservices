@@ -1,12 +1,20 @@
-﻿using System;
+﻿using System.IO;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 
 namespace FacadeService
 {
-    class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var host = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseSetting(WebHostDefaults.DetailedErrorsKey, "true")
+                .UseStartup<Startup>()
+                .Build();
+
+            host.Run();
         }
     }
 }
